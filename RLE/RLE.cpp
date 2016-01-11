@@ -5,17 +5,17 @@ bool decrypt(char* dest, const char* source, uintptr_t len) {
   if (dest == nullptr || source == nullptr || len < 2)
     return false;
 
-  for (size_t i = 0, k = 0; i < len; ++i) {
+  for (size_t i = 0, k = -1; i < len; ++i) {
     if (source[i] < 0) {
       size_t repeat = -1 * source[i];
       for (size_t j = 0; j < repeat; ++j) {
-        dest[k++] = source[++i];
+        dest[++k] = source[++i];
       }
     }
     else {
       size_t repeat = source[i];
       for (size_t j = 0; j < repeat; ++j) {
-        dest[k++] = source[i+1];
+        dest[++k] = source[i+1];
       }
       i += repeat;
     }

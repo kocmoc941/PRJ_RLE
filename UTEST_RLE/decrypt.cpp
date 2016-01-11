@@ -23,7 +23,7 @@ namespace UTEST_RLE
       wchar_t expected[1024]{ L"[p,mojugggnhdbssvgf" };
       char output[1024]{};
       char input[1024]{ "\xF9[p,moju\3g\xFCnhdb\2s\xFDvgf" };
-      decrypt(output, input, 21);
+      decrypt(output, input, 24);
       std::wstringstream unicode;
       unicode << output;
       Assert::AreEqual(expected, unicode.str().c_str(), L"wrong decrypt");
