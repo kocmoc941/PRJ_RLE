@@ -13,11 +13,10 @@ bool decrypt(char* dest, const char* source, uintptr_t len) {
       }
     }
     else {
-      size_t repeat = source[i];
+      size_t repeat = source[i++];
       for (size_t j = 0; j < repeat; ++j) {
-        dest[++k] = source[i+1];
+        dest[++k] = source[i];
       }
-      i += repeat;
     }
   }
   return true;

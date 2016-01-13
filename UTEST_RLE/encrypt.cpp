@@ -91,7 +91,7 @@ namespace UTEST_RLE
         input[i] = '\xFE';
       char output[1024]{};
       wchar_t expected[1024]{ L"\x7f\xFE\x7f\xFE\x7f\xFE\x7f\xFE" };
-      encrypt(output, input, 16);
+      encrypt(output, input, 512);
       std::wstringstream unicode;
       unicode << output;
       Assert::AreEqual(expected, unicode.str().c_str(), L"wrong encrypt");
@@ -103,15 +103,21 @@ namespace UTEST_RLE
       for (size_t i = 0; i < 512; ++i)
         input[i] = (char)i;
       char output[1024]{};
-      wchar_t expected[1024]{};
-      expected[0] = '\x80';
-      for (size_t j = 0; j < 4; ++j)
+      char expect[1024]{};
+
+      for (size_t j = 0; j < 4; ++j) {
+        expect[128 * j] = '\x80';
         for (size_t i = 1; i < 128; ++i)
-          expected[i+127*j+j] = char(i + 127 * j+j);
-      encrypt(output, input, 16);
+          expect[i + 128 * j] = char(i + 128 * j);
+      }
+
+      std::wstringstream expected;
+      expected << expect;
+
+      encrypt(output, input, 512);
       std::wstringstream unicode;
       unicode << output;
-      Assert::AreEqual(expected, unicode.str().c_str(), L"wrong encrypt");
+      Assert::AreEqual(expected.str().c_str(), unicode.str().c_str(), L"wrong encrypt");
     }
 
 	};
