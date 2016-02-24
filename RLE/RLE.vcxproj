@@ -120,6 +120,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Blowfish.h" />
     <ClInclude Include="RLE.H" />
   </ItemGroup>
   <ItemGroup>
