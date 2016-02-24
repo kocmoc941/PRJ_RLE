@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "RLE.H"
+#include "Blowfish.H"
 
 bool decrypt(char* dest, const char* source, uintptr_t len) {
   if (dest == nullptr || source == nullptr || len < 2)
@@ -116,6 +117,10 @@ bool encrypt(char* dest, const char* source, uintptr_t len) {
 }
 
 int main(int argc, char **argv) {
+  TCRYPTO x;
+  std::cout << x.HIWORD(0x00000000FFFFFFFF);
+  std::cin.get();
+  return 0;
   char buff[1024]{ "\x1\x0\x2\x2" };
   //for (size_t i = 0; i < 257; ++i)
     //buff[i] = 'a';
