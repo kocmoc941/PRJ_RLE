@@ -1,6 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "RLE.H"
-#include "Blowfish.H"
+#include "TCRYPTO.H"
 #include <algorithm>
 
 bool decrypt(char* dest, const char* source, uintptr_t len) {
@@ -118,6 +118,8 @@ bool encrypt(char* dest, const char* source, uintptr_t len) {
 }
 
 int main(int argc, char **argv) {
+  TCRYPTO x;
+
   char buff[1024]{ "\x1\x0\x2\x2" };
   //for (size_t i = 0; i < 257; ++i)
     //buff[i] = 'a';

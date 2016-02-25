@@ -120,11 +120,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Blowfish.h" />
+    <ClInclude Include="TCRYPTO.h" />
     <ClInclude Include="RLE.H" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Blowfish.cpp" />
+    <ClCompile Include="TCRYPTO.cpp" />
     <ClCompile Include="RLE.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
