@@ -11,6 +11,8 @@ private:
   void Init();
   void Encrypt(unsigned char *data, unsigned int len, unsigned char *Key);
   void Decrypt(unsigned char *data, unsigned int len, unsigned char *Key);
+  void scrambleMod(char *n);
+  void unscrambleMod(char *n);
 
 public:
   template<typename T>

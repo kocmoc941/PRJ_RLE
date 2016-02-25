@@ -79,6 +79,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -120,10 +121,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="TSOCKET.h" />
     <ClInclude Include="TCRYPTO.h" />
     <ClInclude Include="RLE.H" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="TSOCKET.cpp" />
     <ClCompile Include="TCRYPTO.cpp" />
     <ClCompile Include="RLE.cpp" />
   </ItemGroup>
