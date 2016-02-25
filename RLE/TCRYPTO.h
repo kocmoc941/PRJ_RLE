@@ -9,8 +9,8 @@ public:
 
 private:
   void Init();
-  void Encrypt();
-  void Decrypt();
+  void Encrypt(unsigned char *data, unsigned int len, unsigned char *Key);
+  void Decrypt(unsigned char *data, unsigned int len, unsigned char *Key);
 
 public:
   template<typename T>

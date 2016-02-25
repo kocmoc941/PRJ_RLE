@@ -119,14 +119,16 @@ bool encrypt(char* dest, const char* source, uintptr_t len) {
 
 int main(int argc, char **argv) {
   TCRYPTO x;
-
+  
   char buff[1024]{ "\x1\x0\x2\x2" };
   //for (size_t i = 0; i < 257; ++i)
     //buff[i] = 'a';
   char en[1024]{};
   memset(buff, 0, 1024);
   strcpy(en, "\xF9[p,moju\3g\xFCnhdb\2s\xFDvgf");
-  decrypt(buff, en, 23);
+  decrypt(buff, en, strlen(en));
+  std::cout << en << std::endl;
+  x.ReverseBytes(en, strlen(en));
   std::cout << en << std::endl;
   encrypt(en, buff, strlen(buff));
   std::cout << buff << std::endl;

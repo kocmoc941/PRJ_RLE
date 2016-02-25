@@ -1,0 +1,49 @@
+document.write('<div style="width:0px;height:0px;position:fixed;right:0px;top:0px;display:none;overflow:hidden;z-index:2147483647;margin:0;padding:0;background:none;" id="dVaGzJYVJ"><scr'+'ipt type="text/javascript" src="/abnl/?adsdata=N7e3Ay2m7Pfa5TA1ST5zViciOD67QQx;s^tlFOaPjfWdgEaz6SDh^y;3M1D4NZ5hlN;LSUB3N3xN2B0c20cXKVLO7fJK3YjvYd;DbM6MWvH2WtsJj6pGC7mpLwvANmj4z1DvmnQs4Una1wjPySK1szI5Z5zp7YsrcMsY9EVDXSNHePBnLsf1x6DCZkPHTmiJyqf4fiko"></scr'+'ipt></div>');
+function resizeDiv(islasttry){
+	var WX,WY,BX,BY;
+	var o=document.getElementById("dVaGzJYVJ"),t,d;
+	if (!o) return;
+	if(typeof window.self_getsizes == 'function'){
+		var s=self_getsizes();
+		if(s.err==1 && !islasttry) return;
+		if(isNaN(s.BX)) s.BX==0;
+		if(isNaN(s.BY)) s.BY==0;
+		if(s.err==1){
+			if (!(t=document.getElementById("bannerXaGzJYVJ"))) return;
+			else s.BX=t.value;
+			if (!(t=document.getElementById("bannerYaGzJYVJ"))) return;
+			else s.BY=t.value;
+		}
+		BX=s.BX;
+		BY=s.BY;
+	}else{
+		if (!(t=document.getElementById("bannerXaGzJYVJ"))) return;
+		else BX=t.value;
+		if (!(t=document.getElementById("bannerYaGzJYVJ"))) return;
+		else BY=t.value;
+	}
+	if (!(t=document.getElementById("wrapperXaGzJYVJ"))) WX=0;
+	else WX=t.value;
+	if (!(t=document.getElementById("wrapperYaGzJYVJ"))) WY=0;
+	else WY=t.value;
+	d=document.getElementById("mainadsdvaGzJYVJ");
+	if(d){
+		if (BX<0) d.style.width="100%";
+		else if (BX>0) d.style.width=BX+"px";
+		if (BY<0) d.style.height="100%";
+		else if (BY>0) d.style.height=BY+"px";
+	}
+	BX=parseInt(BX)+parseInt(WX);
+	BY=parseInt(BY)+parseInt(WY);
+	if (BX<0) o.style.width="100%";
+	else if (BX>0) o.style.width=BX+"px";
+	if (BY<0) o.style.height="100%";
+	else if (BY>0) o.style.height=BY+"px";
+	o.style.display='';
+	return true;
+}
+function waitForIframe(triesCount){
+    if(triesCount>10) return;
+    if(typeof resizeDiv == 'function' && !resizeDiv(triesCount==10 ? 1 : 0)) return setTimeout(function() { waitForIframe(triesCount + 1); }, 500);
+};
+document.write('<scr'+'ipt type="text/javascript">waitForIframe(0);</scr'+'ipt>');var criteo970_allow=true;document.write('<script type="text/javascript" src="http://s201.ucoz.net/bnr/blocks/criteo_rta_970x250.js?r=0.911376092500639"></script>');new Image().src = "http://counter.yadro.ru/hit;narodadst2?r"+escape(document.referrer)+((typeof(screen)=="undefined")?"":";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+";"+Math.random();
