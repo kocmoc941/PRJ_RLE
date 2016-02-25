@@ -11,40 +11,37 @@ private:
   void Init();
   void Encrypt();
   void Decrypt();
-  template<typename T>
-  T&& TCRYPTO::getSizeOf(T type);
 
 public:
   template<typename T>
+  void ReverseBytes(T* a, size_t len);
+
+  template<typename T, size_t size = sizeof(T) * 8 / 2>
   T&& LOWORD(T val);
 
-  template<typename T>
+  template<typename T, size_t size = sizeof(T) * 8 / 2>
   T&& HIWORD(T val);
+
+  template<typename T, size_t size = sizeof(T) * 8 / 2>
+  void SwapBites(T& a);
 };
 
-template<typename T>
-T&& TCRYPTO::getSizeOf(T type) {
-  #define isSomeType(a,b) typeid(a) == typeid(b)
-  T size = 0;
-  if (isSomeType(T, unsigned short) ||
-    isSomeType(T, unsigned short) || isSomeType(T, short) ||
-    isSomeType(T, unsigned int) || isSomeType(T, int) ||
-    isSomeType(T, unsigned long) || isSomeType(T, long) ||
-    isSomeType(T, unsigned long long) || isSomeType(T, long long))
-    size = (sizeof(T) * 8) / 2;
-  else
-    return -1;
-  return std::move(size);
-}
-
-template<typename T>
+template<typename T, size_t size>
 T&& TCRYPTO::LOWORD(T val) {
-  size_t size = getSizeOf(val);
-  return std::move(val << size >> size);
+  return std::move((val <<= size) >>= size);
+}
+
+template<typename T, size_t size>
+T&& TCRYPTO::HIWORD(T val) {
+  return std::move(val >>= size);
+}
+
+template<typename T, size_t size>
+void TCRYPTO::SwapBites(T& a) {
+  a = (a >> size) + (a << size);
 }
 
 template<typename T>
-T&& TCRYPTO::HIWORD(T val) {
-  T size = getSizeOf(val);
-  return std::move(val >> size << size);
+void TCRYPTO::ReverseBytes(T* a, size_t len) {
+  std::reverse(a, a + len);
 }
