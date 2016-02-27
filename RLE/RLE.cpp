@@ -119,7 +119,12 @@ bool encrypt(char* dest, const char* source, uintptr_t len) {
 }
 
 int main(int argc, char **argv) {
-  TSOCKET x(10, INADDR_ANY, 10, 10);
+  TSOCKET x(80, "31.132.191.222", SOCK_STREAM, IPPROTO_TCP, "www.yandex.ru");
+  x.ConnectAsClient();
+  char rq[] = "GET / HTTP/1.1\nHost:www.yandex.ru\nContent-type:text/html\nConnection:close\n\n";
+  x.Send(rq, sizeof(rq));
+  int s = x.Recv();
+  std::cout << x.GetBuff() << std::endl;
   std::cin.get();
   return 0;
   char buff[1024]{ "\x1\x0\x2\x2" };

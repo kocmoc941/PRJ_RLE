@@ -5,10 +5,19 @@
 #include <assert.h>
 #include <WS2tcpip.h>
 
-TSOCKET::TSOCKET(int port, char *addr, int type, int proto) try:_port(port), _type(type), _proto(proto), _addr(addr) {
+TSOCKET::TSOCKET(int port, char *addr, int type, int proto, char* uri) try:_port(port), _type(type), _proto(proto), _addr(addr), _uri(uri) {
   assert( !(WSAStartup(MAKEWORD(2, 2), &WSADATA()) == SOCKET_ERROR) );
   server = socket(AF_INET, type, proto);
-  servsa.sin_addr.s_addr = inet_pton(AF_INET, addr, nullptr);
+  char add[1024];
+  
+  IN_ADDR ia;
+  if (_uri) {
+    HOSTENT *hst = gethostbyname(_uri);
+    ia = ((sockaddr_in*)hst->h_addr_list[0])->sin_addr;
+  }
+
+  servsa.sin_addr.s_addr = inet_pton(AF_INET, addr, add);
+  servsa.sin_addr.s_addr = _uri ? ia.s_addr : inet_addr(addr);
   servsa.sin_family = AF_INET;
   servsa.sin_port = htons(port);
 }
@@ -23,7 +32,6 @@ TSOCKET::~TSOCKET() {
   assert( !(WSACleanup() == SOCKET_ERROR) );
 }
 
-
 unsigned long TSOCKET::checksum(unsigned char *packet, int count)
 {
   long chksum = 0L;
@@ -32,7 +40,7 @@ unsigned long TSOCKET::checksum(unsigned char *packet, int count)
 }
 
 void TSOCKET::ConnectAsClient() {
-  assert(!(bind(server, (sockaddr*)&servsa, sizeof(servsa)) == SOCKET_ERROR));
+  //assert(!(bind(server, (sockaddr*)&servsa, sizeof(servsa)) == SOCKET_ERROR));
   assert(!(connect(server, (sockaddr*)&servsa, sizeof(servsa)) == SOCKET_ERROR));
 }
 
