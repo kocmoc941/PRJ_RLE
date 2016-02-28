@@ -4,6 +4,7 @@
 #include <windows.h>
 #include <assert.h>
 #include <WS2tcpip.h>
+#include <iostream>
 
 TSOCKET::TSOCKET(int port, char *addr, int type, int proto, char* uri) try:_port(port), _type(type), _proto(proto), _addr(addr), _uri(uri) {
   assert( !(WSAStartup(MAKEWORD(2, 2), &WSADATA()) == SOCKET_ERROR) );
@@ -13,7 +14,7 @@ TSOCKET::TSOCKET(int port, char *addr, int type, int proto, char* uri) try:_port
   IN_ADDR ia;
   if (_uri) {
     HOSTENT *hst = gethostbyname(_uri);
-    ia = ((sockaddr_in*)hst->h_addr_list[0])->sin_addr;
+    ia.s_addr = ((IN_ADDR*)hst->h_addr_list[0])->s_addr;
   }
 
   servsa.sin_addr.s_addr = inet_pton(AF_INET, addr, add);
@@ -41,7 +42,9 @@ unsigned long TSOCKET::checksum(unsigned char *packet, int count)
 
 void TSOCKET::ConnectAsClient() {
   //assert(!(bind(server, (sockaddr*)&servsa, sizeof(servsa)) == SOCKET_ERROR));
-  assert(!(connect(server, (sockaddr*)&servsa, sizeof(servsa)) == SOCKET_ERROR));
+  /*assert*/if (connect(server, (sockaddr*)&servsa, sizeof(servsa)) == SOCKET_ERROR) {
+    std::cout << GetLastError();
+  }
 }
 
 int TSOCKET::Send(char *buff, size_t size) {
@@ -50,6 +53,7 @@ int TSOCKET::Send(char *buff, size_t size) {
 
 int TSOCKET::Recv() {
   _recvlen = 0;
+  memset(_buff, 0, sizeof(_buff));
   return _recvlen = recvfrom(server, _buff, sizeof(_buff), 0, (sockaddr*)&servsa, (int*)sizeof(servsa));
 }
 

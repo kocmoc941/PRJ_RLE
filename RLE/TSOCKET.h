@@ -21,6 +21,6 @@ private:
     SOCKADDR_IN servsa;
     IN_ADDR servia;
     HOSTENT *hst;
-    char _buff[1024*10]{};
+    char _buff[1024*1]{};
     int _recvlen;
 };
