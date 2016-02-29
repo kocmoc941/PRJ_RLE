@@ -117,15 +117,22 @@ bool encrypt(char* dest, const char* source, uintptr_t len) {
   delete[]hash;
   return true;
 }
-
+#include <WS2tcpip.h>
 int main(int argc, char **argv) {
   // GS: 89.108.86.149
   // LS: 89.108.87.58
-  TSOCKET x(2106, "89.108.87.58", SOCK_STREAM, IPPROTO_TCP, nullptr);
-  x.ConnectAsClient();
+  TSOCKET x(2106, "89.108.87.58", SOCK_STREAM, IPPROTO_TCP, "google.ru");
+  //x.ConnectAsClient();
   //char rq[5] = {0,0,3,1,4};
   // 00 XX XX XX XX
   //x.Send(rq, sizeof(rq));
+#ifdef _NBLOCKED
+  #define SIO_RCVALL 0x98000001 //promiscuous
+  unsigned long fl = 1;
+  ioctlsocket(x.GetServerSocket(), FIONBIO, &fl);
+  std::cout << "socket change to non-block\n";
+  while (x.Recv() == WSAEWOULDBLOCK);
+#endif
   if (x.Recv()>0)  {
     std::cout << *(unsigned short*)x.GetBuff() << std::endl;
     std::cout << x.GetBuffSize() << std::endl;

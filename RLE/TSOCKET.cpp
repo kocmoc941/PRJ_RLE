@@ -1,3 +1,4 @@
+//#define _WINSOCK_DEPRECATED_NO_WARNINGS
 #include "TSOCKET.h"
 #include <stdexcept>
 #include <sstream>
@@ -6,19 +7,29 @@
 #include <WS2tcpip.h>
 #include <iostream>
 
-TSOCKET::TSOCKET(int port, char *addr, int type, int proto, char* uri) try:_port(port), _type(type), _proto(proto), _addr(addr), _uri(uri) {
-  assert( !(WSAStartup(MAKEWORD(2, 2), &WSADATA()) == SOCKET_ERROR) );
+TSOCKET::TSOCKET(int port, char *addr, int type, int proto, char* uri) try :_port(port), _type(type), _proto(proto), _addr(addr), _uri(uri) {
+  assert(!(WSAStartup(MAKEWORD(2, 2), &WSADATA()) == SOCKET_ERROR));
   server = socket(AF_INET, type, proto);
-  char add[1024];
-  
+
   IN_ADDR ia;
   if (_uri) {
-    HOSTENT *hst = gethostbyname(_uri);
-    ia.s_addr = ((IN_ADDR*)hst->h_addr_list[0])->s_addr;
+    PADDRINFOA res = nullptr;
+    addrinfo hint{};
+    if (!getaddrinfo(_uri, nullptr, &hint/*nullptr*/, &res)) {
+      //HOSTENT *hst = gethostbyname(_uri);
+      //ia.s_addr = ((IN_ADDR*)hst->h_addr_list[0])->s_addr;
+      ia.s_addr = ((sockaddr_in*)res->ai_addr)->sin_addr.s_addr;
+      char hostname[NI_MAXHOST]{};
+      if (!getnameinfo(res->ai_addr, res->ai_addrlen, hostname, NI_MAXHOST, nullptr, 0, 0))
+        std::cout << hostname << std::endl;
+      freeaddrinfo(res);
+    }
   }
-
-  servsa.sin_addr.s_addr = inet_pton(AF_INET, addr, add);
-  servsa.sin_addr.s_addr = _uri ? ia.s_addr : inet_addr(addr);
+  ULONG add = 0;
+  if (inet_pton(AF_INET, addr, &add)) {
+    servsa.sin_addr.s_addr = _uri ? ia.s_addr : add;
+  }
+  //servsa.sin_addr.s_addr = _uri ? ia.s_addr : inet_addr(addr);
   servsa.sin_family = AF_INET;
   servsa.sin_port = htons(port);
 }
@@ -30,7 +41,9 @@ catch (std::runtime_error&e) {
 }
 
 TSOCKET::~TSOCKET() {
-  assert( !(WSACleanup() == SOCKET_ERROR) );
+  assert(!(shutdown(server, SD_BOTH) == SOCKET_ERROR));
+  assert(!(closesocket(server) == SOCKET_ERROR));
+  assert(!(WSACleanup() == SOCKET_ERROR));
 }
 
 unsigned long TSOCKET::checksum(unsigned char *packet, int count)
@@ -54,7 +67,7 @@ int TSOCKET::Send(char *buff, size_t size) {
 int TSOCKET::Recv() {
   _recvlen = 0;
   memset(_buff, 0, sizeof(_buff));
-  return _recvlen = recvfrom(server, _buff, sizeof(_buff), 0, (sockaddr*)&servsa, (int*)sizeof(servsa));
+  return _recvlen = recvfrom(server, _buff, (unsigned short)~0, 0, (sockaddr*)&servsa, (int*)sizeof(servsa));
 }
 
 const char* TSOCKET::GetBuff() {

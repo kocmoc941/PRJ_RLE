@@ -26,6 +26,7 @@ public:
 
   template<typename T, size_t size = sizeof(T) * 8 / 2>
   void SwapBites(T& a);
+
 };
 
 template<typename T, size_t size>
