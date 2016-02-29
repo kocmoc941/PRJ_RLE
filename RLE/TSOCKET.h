@@ -14,6 +14,12 @@ public:
   const char* GetBuff();
   int GetBuffSize();
 
+#ifdef _DEBUG
+  SOCKET GetServerSocket() {
+    return server;
+  }
+#endif
+
 private:
     int _port, _type, _proto;
     char *_addr, *_uri;
@@ -21,6 +27,6 @@ private:
     SOCKADDR_IN servsa;
     IN_ADDR servia;
     HOSTENT *hst;
-    char _buff[1024*1]{};
+    char _buff[(unsigned short)~0]{};
     int _recvlen;
 };
