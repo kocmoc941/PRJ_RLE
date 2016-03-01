@@ -121,8 +121,8 @@ bool encrypt(char* dest, const char* source, uintptr_t len) {
 int main(int argc, char **argv) {
   // GS: 89.108.86.149
   // LS: 89.108.87.58
-  TSOCKET x(2106, "89.108.87.58", SOCK_STREAM, IPPROTO_TCP, "google.ru");
-  //x.ConnectAsClient();
+  TSOCKET x(2106, "89.108.87.58", SOCK_STREAM, IPPROTO_TCP, nullptr);
+  x.ConnectAsClient();
   //char rq[5] = {0,0,3,1,4};
   // 00 XX XX XX XX
   //x.Send(rq, sizeof(rq));
@@ -133,10 +133,15 @@ int main(int argc, char **argv) {
   std::cout << "socket change to non-block\n";
   while (x.Recv() == WSAEWOULDBLOCK);
 #endif
-  if (x.Recv()>0)  {
-    std::cout << *(unsigned short*)x.GetBuff() << std::endl;
-    std::cout << x.GetBuffSize() << std::endl;
-  }
+  fd_set read;
+  FD_ZERO(&read);
+  FD_SET(x.GetServerSocket(), &read);
+  timeval sec{ 1 };
+  if (select(x.GetServerSocket()+1, &read, nullptr, nullptr, &sec) > 0)
+    if (x.Recv()>0)  {
+      std::cout << *(unsigned short*)x.GetBuff() << std::endl;
+      std::cout << x.GetBuffSize() << std::endl;
+    }
   std::cin.get();
   return 0;
   char buff[1024]{ "\x1\x0\x2\x2" };
