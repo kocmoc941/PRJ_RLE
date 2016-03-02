@@ -7,7 +7,7 @@
 #include <WS2tcpip.h>
 #include <iostream>
 
-TSOCKET::TSOCKET(int port, char *addr, int type, int proto, char* uri) try :_port(port), _type(type), _proto(proto), _addr(addr), _uri(uri) {
+TSOCKCLIENT::TSOCKCLIENT(int port, char *addr, int type, int proto, char* uri) try :_port(port), _type(type), _proto(proto), _addr(addr), _uri(uri) {
   assert(!(WSAStartup(MAKEWORD(2, 2), &WSADATA()) == SOCKET_ERROR));
   server = socket(AF_INET, type, proto);
 
@@ -40,40 +40,40 @@ catch (std::runtime_error&e) {
   str << e.what();
 }
 
-TSOCKET::~TSOCKET() {
+TSOCKCLIENT::~TSOCKCLIENT() {
   assert(!(shutdown(server, SD_BOTH) == SOCKET_ERROR));
   assert(!(closesocket(server) == SOCKET_ERROR));
   assert(!(WSACleanup() == SOCKET_ERROR));
 }
 
-unsigned long TSOCKET::checksum(unsigned char *packet, int count)
+unsigned long TSOCKCLIENT::checksum(unsigned char *packet, int count)
 {
   long chksum = 0L;
   for (int i = 0; i < count; i += 4) chksum ^= *((unsigned long *)&packet[i]);
   return chksum;
 }
 
-void TSOCKET::ConnectAsClient() {
+void TSOCKCLIENT::Connect() {
   //assert(!(bind(server, (sockaddr*)&servsa, sizeof(servsa)) == SOCKET_ERROR));
   /*assert*/if (connect(server, (sockaddr*)&servsa, sizeof(servsa)) == SOCKET_ERROR) {
     std::cout << GetLastError();
   }
 }
 
-int TSOCKET::Send(char *buff, size_t size) {
+int TSOCKCLIENT::Send(char *buff, size_t size) {
   return sendto(server, buff, size, 0, (sockaddr*)&servsa, sizeof(servsa));
 }
 
-int TSOCKET::Recv() {
+int TSOCKCLIENT::Recv() {
   _recvlen = 0;
   memset(_buff, 0, sizeof(_buff));
   return _recvlen = recvfrom(server, _buff, (unsigned short)~0, 0, (sockaddr*)&servsa, (int*)sizeof(servsa));
 }
 
-const char* TSOCKET::GetBuff() {
+const char* TSOCKCLIENT::GetBuff() {
   return _buff;
 }
 
-int TSOCKET::GetBuffSize() {
+int TSOCKCLIENT::GetBuffSize() {
   return _recvlen;
 }
