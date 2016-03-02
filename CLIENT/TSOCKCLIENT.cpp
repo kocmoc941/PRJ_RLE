@@ -54,26 +54,37 @@ unsigned long TSOCKCLIENT::checksum(unsigned char *packet, int count)
 }
 
 void TSOCKCLIENT::Connect() {
-  //assert(!(bind(server, (sockaddr*)&servsa, sizeof(servsa)) == SOCKET_ERROR));
-  /*assert*/if (connect(server, (sockaddr*)&servsa, sizeof(servsa)) == SOCKET_ERROR) {
-    std::cout << GetLastError();
-  }
+  assert(!(connect(server, (sockaddr*)&servsa, sizeof(servsa)) == SOCKET_ERROR));
 }
 
-int TSOCKCLIENT::Send(char *buff, size_t size) {
+int TSOCKCLIENT::Send(const char *buff, size_t size) {
   return sendto(server, buff, size, 0, (sockaddr*)&servsa, sizeof(servsa));
 }
 
+int TSOCKCLIENT::Send() {
+  assert(GetBuffSize() > 0);
+  return Send(GetBuff(), GetBuffSize());
+}
+
 int TSOCKCLIENT::Recv() {
-  _recvlen = 0;
+  _currbuffsize = _recvlen = 0;
   memset(_buff, 0, sizeof(_buff));
-  return _recvlen = recvfrom(server, _buff, (unsigned short)~0, 0, (sockaddr*)&servsa, (int*)sizeof(servsa));
+  return _currbuffsize = (_recvlen = recvfrom(server, _buff, (unsigned short)~0, 0, (sockaddr*)&servsa, (int*)sizeof(servsa)));
 }
 
 const char* TSOCKCLIENT::GetBuff() {
   return _buff;
 }
 
-int TSOCKCLIENT::GetBuffSize() {
+int TSOCKCLIENT::GetRecvSize() {
   return _recvlen;
+}
+
+int TSOCKCLIENT::GetBuffSize() {
+  return _currbuffsize;
+}
+
+void TSOCKCLIENT::ResetBuffer() {
+  _currbuffsize = 0;
+  memset(_buff, 0, sizeof(_buff));
 }
