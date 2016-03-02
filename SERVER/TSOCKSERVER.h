@@ -1,11 +1,11 @@
 #pragma once
 #pragma once
 #include <WinSock2.h>
-class TSOCKCLIENT {
+class TSOCKSERVER {
 public:
-  TSOCKCLIENT() = delete;
-  ~TSOCKCLIENT();
-  TSOCKCLIENT(int port, char *addr, int type, int proto, char* uri = nullptr);
+  TSOCKSERVER() = delete;
+  ~TSOCKSERVER();
+  TSOCKSERVER(int port, char *addr, int type, int proto, char* uri = nullptr);
   unsigned long checksum(unsigned char *packet, int count);
 
   void Connect();

@@ -19,11 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="TSOCKET.h" />
+    <ClInclude Include="TSOCKSERVER.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="TSOCKET.cpp" />
+    <ClCompile Include="TSOCKSERVER.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D41BBA75-BF23-4051-908E-DED98DB7E55C}</ProjectGuid>

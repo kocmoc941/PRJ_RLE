@@ -1,5 +1,5 @@
 //#define _WINSOCK_DEPRECATED_NO_WARNINGS
-#include "TSOCKET.h"
+#include "TSOCKSERVER.h"
 #include <stdexcept>
 #include <sstream>
 #include <windows.h>
@@ -7,7 +7,7 @@
 #include <WS2tcpip.h>
 #include <iostream>
 
-TSOCKCLIENT::TSOCKCLIENT(int port, char *addr, int type, int proto, char* uri) try :_port(port), _type(type), _proto(proto), _addr(addr), _uri(uri) {
+TSOCKSERVER::TSOCKSERVER(int port, char *addr, int type, int proto, char* uri) try :_port(port), _type(type), _proto(proto), _addr(addr), _uri(uri) {
   assert(!(WSAStartup(MAKEWORD(2, 2), &WSADATA()) == SOCKET_ERROR));
   server = socket(AF_INET, type, proto);
 
@@ -40,40 +40,40 @@ catch (std::runtime_error&e) {
   str << e.what();
 }
 
-TSOCKCLIENT::~TSOCKCLIENT() {
+TSOCKSERVER::~TSOCKSERVER() {
   assert(!(shutdown(server, SD_BOTH) == SOCKET_ERROR));
   assert(!(closesocket(server) == SOCKET_ERROR));
   assert(!(WSACleanup() == SOCKET_ERROR));
 }
 
-unsigned long TSOCKCLIENT::checksum(unsigned char *packet, int count)
+unsigned long TSOCKSERVER::checksum(unsigned char *packet, int count)
 {
   long chksum = 0L;
   for (int i = 0; i < count; i += 4) chksum ^= *((unsigned long *)&packet[i]);
   return chksum;
 }
 
-void TSOCKCLIENT::Connect() {
+void TSOCKSERVER::Connect() {
   //assert(!(bind(server, (sockaddr*)&servsa, sizeof(servsa)) == SOCKET_ERROR));
   /*assert*/if (connect(server, (sockaddr*)&servsa, sizeof(servsa)) == SOCKET_ERROR) {
     std::cout << GetLastError();
   }
 }
 
-int TSOCKCLIENT::Send(char *buff, size_t size) {
+int TSOCKSERVER::Send(char *buff, size_t size) {
   return sendto(server, buff, size, 0, (sockaddr*)&servsa, sizeof(servsa));
 }
 
-int TSOCKCLIENT::Recv() {
+int TSOCKSERVER::Recv() {
   _recvlen = 0;
   memset(_buff, 0, sizeof(_buff));
   return _recvlen = recvfrom(server, _buff, (unsigned short)~0, 0, (sockaddr*)&servsa, (int*)sizeof(servsa));
 }
 
-const char* TSOCKCLIENT::GetBuff() {
+const char* TSOCKSERVER::GetBuff() {
   return _buff;
 }
 
-int TSOCKCLIENT::GetBuffSize() {
+int TSOCKSERVER::GetBuffSize() {
   return _recvlen;
 }

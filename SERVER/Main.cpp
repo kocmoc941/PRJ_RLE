@@ -1,5 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include "TSOCKET.h"
+#include "TSOCKSERVER.h"
 #include <algorithm>
 #include <iostream>
 
@@ -121,7 +121,7 @@ int main(int argc, char **argv) {
   using namespace std;
   // GS: 89.108.86.149
   // LS: 89.108.87.58
-  TSOCKCLIENT x(2106, "89.108.87.58", SOCK_STREAM, IPPROTO_TCP, nullptr);
+  TSOCKSERVER x(2106, "89.108.87.58", SOCK_STREAM, IPPROTO_TCP, nullptr);
   x.Connect();
   //char rq[5] = {0,0,3,1,4};
   // 00 XX XX XX XX

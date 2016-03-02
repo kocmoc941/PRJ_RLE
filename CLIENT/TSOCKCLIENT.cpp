@@ -1,5 +1,5 @@
 //#define _WINSOCK_DEPRECATED_NO_WARNINGS
-#include "TSOCKET.h"
+#include "TSOCKCLIENT.h"
 #include <stdexcept>
 #include <sstream>
 #include <windows.h>

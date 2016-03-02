@@ -1,5 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include "TSOCKET.h"
+#include "TSOCKCLIENT.h"
 #include <algorithm>
 #include <iostream>
 
