@@ -119,13 +119,32 @@ bool encrypt(char* dest, const char* source, uintptr_t len) {
 
 int main(int argc, char **argv) {
   using namespace std;
+  // lineageclassic.ru
   // GS: 89.108.86.149
   // LS: 89.108.87.58
   TSOCKCLIENT x(2106, "89.108.87.58", SOCK_STREAM, IPPROTO_TCP, nullptr);
   x.Connect();
-  //char rq[5] = {0,0,3,1,4};
-  // 00 XX XX XX XX
-  //x.Send(rq, sizeof(rq));
+  //Init -> from server
+  //Формат для ревизии протокола 0x785a : (для ревизии 785a он составляет 11 байт, для c621 – 170)
+  //00
+  //XX XX XX XX	// ID сессии
+  //XX XX XX XX	// Версия протокола 0x785a
+  x.Recv();
+  //RequestGGAuth -> to server
+  //07
+  //XX XX XX XX		// ID сессии
+  //XX XX XX XX		// неизвестно
+  //XX XX XX XX		// неизвестно
+  //XX XX XX XX		// неизвестно
+  //XX XX XX XX		// неизвестно
+  x.SetBuffer(0x07, 1);
+  x.Send(x.GetBuff(), 21);
+  //GGAuth
+  //0B - success
+  //XX XX XX XX
+  x.Recv();
+  std::cout << "server GGAuth status: " << std::hex << *(unsigned short*)x.GetBuff() << std::endl;
+
 #ifdef _NBLOCKED
 #define SIO_RCVALL 0x98000001 //promiscuous
   unsigned long fl = 1;

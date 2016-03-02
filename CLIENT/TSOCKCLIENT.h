@@ -9,10 +9,19 @@ public:
   unsigned long checksum(unsigned char *packet, int count);
 
   void Connect();
-  int Send(char *buff, size_t size);
+  int Send(const char *buff, size_t size);
+  int Send();
   int Recv();
   const char* GetBuff();
   int GetBuffSize();
+  int GetRecvSize();
+  template<typename V, typename ...T>
+  void SetBuffer(V&& value, T&&... arg);
+  template<typename V>
+  void SetBuffer(V&& value);
+  template<typename V>
+  void SetBufferMass(V* value, size_t size);
+  void ResetBuffer();
 
   //#ifdef __DEBUG
   SOCKET GetServerSocket() {
@@ -26,7 +35,26 @@ private:
   SOCKET client, server;
   SOCKADDR_IN servsa;
   IN_ADDR servia;
-  HOSTENT *hst;
+  HOSTENT *hst = nullptr;
   char _buff[(unsigned short)~0]{};
-  int _recvlen;
+  size_t _currbuffsize = 0;
+  int _recvlen = 0;
 };
+
+template<typename V>
+void TSOCKCLIENT::SetBuffer(V&& value) {
+  _buff[_currbuffsize++] = *(char*)&value;
+}
+
+template<typename V, typename ...T>
+void TSOCKCLIENT::SetBuffer(V&& value, T&&... arg) {
+  _buff[_currbuffsize++] = *(char*)&value;
+  SetBuffer(arg...);
+}
+
+template<typename V>
+void TSOCKCLIENT::SetBufferMass(V* value, size_t size) {
+  for (size_t i = 0; i < size; ++i)
+    _buff[i] = value[i];
+  _currbuffsize = size;
+}
