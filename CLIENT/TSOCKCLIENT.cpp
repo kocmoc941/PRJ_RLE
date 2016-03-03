@@ -72,6 +72,12 @@ int TSOCKCLIENT::Recv() {
   return _currbuffsize = (_recvlen = recvfrom(server, _buff, (unsigned short)~0, 0, (sockaddr*)&servsa, (int*)sizeof(servsa)));
 }
 
+int TSOCKCLIENT::Recv(int size) {
+  _currbuffsize = _recvlen = 0;
+  memset(_buff, 0, sizeof(_buff));
+  return _currbuffsize = (_recvlen = recvfrom(server, _buff, size, 0, (sockaddr*)&servsa, (int*)sizeof(servsa)));
+}
+
 const char* TSOCKCLIENT::GetBuff() {
   return _buff;
 }

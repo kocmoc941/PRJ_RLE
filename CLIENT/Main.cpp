@@ -125,15 +125,20 @@ int main(int argc, char **argv) {
   // l2classic.club
   // 
   // LS: 92.222.249.228 2106
-  TSOCKCLIENT x(2106, "92.222.249.228", SOCK_STREAM, IPPROTO_TCP, nullptr);
+  char * LS = true ? "89.108.87.58" : "92.222.249.228";
+  TSOCKCLIENT x(2106, LS, SOCK_STREAM, IPPROTO_TCP, nullptr);
   x.Connect();
   //Init -> from server
   //‘ормат дл€ ревизии протокола 0x785a : (дл€ ревизии 785a он составл€ет 11 байт, дл€ c621 Ц 170)
   //00
   //XX XX XX XX	// ID сессии
   //XX XX XX XX	// ¬ерси€ протокола 0x785a
-  std::cout << x.Recv() << std::endl;
-  //std::cout << x.GetBuff() << std::endl;
+  std::cout << x.Recv(2) << std::endl;
+  std::cout << "packet size: " << *(short*)x.GetBuff() << std::endl;
+  std::cout << x.Recv(*(short*)x.GetBuff());
+  std::cout << "read packet bytes: " << x.GetBuffSize() << std::endl;
+  std::cout << "read packet bytes: " << x.GetRecvSize() << std::endl;
+  std::cout << "read packet bytes: " << *(short*)x.GetBuff() << std::endl;
   //RequestGGAuth -> to server
   //07
   //XX XX XX XX		// ID сессии
@@ -148,38 +153,8 @@ int main(int argc, char **argv) {
   //0B - success
   //XX XX XX XX
   //x.Recv();
-  std::cout << "server GGAuth status: " << std::hex << *(unsigned short*)x.GetBuff() << std::endl;
-
-#ifdef _NBLOCKED
-#define SIO_RCVALL 0x98000001 //promiscuous
-  unsigned long fl = 1;
-  ioctlsocket(x.GetServerSocket(), FIONBIO, &fl);
-  std::cout << "socket change to non-block\n";
-  while (x.Recv() == WSAEWOULDBLOCK);
-#endif
-  fd_set read;
-  FD_ZERO(&read);
-  FD_SET(x.GetServerSocket(), &read);
-  timeval sec{ 1 };
-  if (select(x.GetServerSocket() + 1, &read, nullptr, nullptr, &sec) > 0)
-    if (x.Recv()>0) {
-      std::cout << *(unsigned short*)x.GetBuff() << std::endl;
-      std::cout << x.GetBuffSize() << std::endl;
-    }
-  std::cin.get();
-  return 0;
-  char buff[1024]{ "\x1\x0\x2\x2" };
-  //for (size_t i = 0; i < 257; ++i)
-  //buff[i] = 'a';
-  char en[1024]{};
-  memset(buff, 0, 1024);
-  strcpy(en, "\xF9[p,moju\3g\xFCnhdb\2s\xFDvgf");
-  decrypt(buff, en, strlen(en));
-  std::cout << en << std::endl;
-  std::cout << en << std::endl;
-  encrypt(en, buff, strlen(buff));
-  std::cout << buff << std::endl;
-  std::cout << en << std::endl;
+  USHORT sh = *(unsigned short*)x.GetBuff();
+  std::cout << "server GGAuth status: " << sh << std::endl;
   std::cin.get();
   return 0;
 }

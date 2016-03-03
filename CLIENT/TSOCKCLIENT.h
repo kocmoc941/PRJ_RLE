@@ -12,6 +12,7 @@ public:
   int Send(const char *buff, size_t size);
   int Send();
   int Recv();
+  int Recv(int size);
   const char* GetBuff();
   int GetBuffSize();
   int GetRecvSize();
