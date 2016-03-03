@@ -22,6 +22,7 @@ public:
   template<typename V>
   void SetBufferMass(V* value, size_t size);
   void ResetBuffer();
+  void SetCurrPos(size_t pos);
 
   //#ifdef __DEBUG
   SOCKET GetServerSocket() {
@@ -38,17 +39,18 @@ private:
   HOSTENT *hst = nullptr;
   char _buff[(unsigned short)~0]{};
   size_t _currbuffsize = 0;
+  size_t _currpos = 0;
   int _recvlen = 0;
 };
 
 template<typename V>
 void TSOCKCLIENT::SetBuffer(V&& value) {
-  _buff[_currbuffsize++] = *(char*)&value;
+  _buff[_currpos] = *(char*)&value;
 }
 
 template<typename V, typename ...T>
 void TSOCKCLIENT::SetBuffer(V&& value, T&&... arg) {
-  _buff[_currbuffsize++] = *(char*)&value;
+  _buff[_currpos] = *(char*)&value;
   SetBuffer(arg...);
 }
 

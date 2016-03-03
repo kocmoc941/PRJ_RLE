@@ -88,3 +88,7 @@ void TSOCKCLIENT::ResetBuffer() {
   _currbuffsize = 0;
   memset(_buff, 0, sizeof(_buff));
 }
+
+void TSOCKCLIENT::SetCurrPos(size_t pos) {
+  _currpos = 0;
+}

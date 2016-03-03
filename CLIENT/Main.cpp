@@ -120,16 +120,20 @@ bool encrypt(char* dest, const char* source, uintptr_t len) {
 int main(int argc, char **argv) {
   using namespace std;
   // lineageclassic.ru
-  // GS: 89.108.86.149
-  // LS: 89.108.87.58
-  TSOCKCLIENT x(2106, "89.108.87.58", SOCK_STREAM, IPPROTO_TCP, nullptr);
+  // GS: 89.108.86.149 7777
+  // LS: 89.108.87.58 2106
+  // l2classic.club
+  // 
+  // LS: 92.222.249.228 2106
+  TSOCKCLIENT x(2106, "92.222.249.228", SOCK_STREAM, IPPROTO_TCP, nullptr);
   x.Connect();
   //Init -> from server
   //Формат для ревизии протокола 0x785a : (для ревизии 785a он составляет 11 байт, для c621 – 170)
   //00
   //XX XX XX XX	// ID сессии
   //XX XX XX XX	// Версия протокола 0x785a
-  x.Recv();
+  std::cout << x.Recv() << std::endl;
+  //std::cout << x.GetBuff() << std::endl;
   //RequestGGAuth -> to server
   //07
   //XX XX XX XX		// ID сессии
@@ -137,12 +141,13 @@ int main(int argc, char **argv) {
   //XX XX XX XX		// неизвестно
   //XX XX XX XX		// неизвестно
   //XX XX XX XX		// неизвестно
+  /*x.SetCurrPos(0);
   x.SetBuffer(0x07, 1);
-  x.Send(x.GetBuff(), 21);
+  x.Send(x.GetBuff(), 21);*/
   //GGAuth
   //0B - success
   //XX XX XX XX
-  x.Recv();
+  //x.Recv();
   std::cout << "server GGAuth status: " << std::hex << *(unsigned short*)x.GetBuff() << std::endl;
 
 #ifdef _NBLOCKED
