@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "RLE.H"
 #include "TCRYPTO.H"
+#include "TSOCKET.h"
 #include <algorithm>
 
 bool decrypt(char* dest, const char* source, uintptr_t len) {
@@ -116,10 +117,33 @@ bool encrypt(char* dest, const char* source, uintptr_t len) {
   delete[]hash;
   return true;
 }
-
+#include <WS2tcpip.h>
 int main(int argc, char **argv) {
-  TCRYPTO x;
-  
+  // GS: 89.108.86.149
+  // LS: 89.108.87.58
+  TSOCKET x(2106, "89.108.87.58", SOCK_STREAM, IPPROTO_TCP, nullptr);
+  x.ConnectAsClient();
+  //char rq[5] = {0,0,3,1,4};
+  // 00 XX XX XX XX
+  //x.Send(rq, sizeof(rq));
+#ifdef _NBLOCKED
+  #define SIO_RCVALL 0x98000001 //promiscuous
+  unsigned long fl = 1;
+  ioctlsocket(x.GetServerSocket(), FIONBIO, &fl);
+  std::cout << "socket change to non-block\n";
+  while (x.Recv() == WSAEWOULDBLOCK);
+#endif
+  fd_set read;
+  FD_ZERO(&read);
+  FD_SET(x.GetServerSocket(), &read);
+  timeval sec{ 1 };
+  if (select(x.GetServerSocket()+1, &read, nullptr, nullptr, &sec) > 0)
+    if (x.Recv()>0)  {
+      std::cout << *(unsigned short*)x.GetBuff() << std::endl;
+      std::cout << x.GetBuffSize() << std::endl;
+    }
+  std::cin.get();
+  return 0;
   char buff[1024]{ "\x1\x0\x2\x2" };
   //for (size_t i = 0; i < 257; ++i)
     //buff[i] = 'a';
@@ -128,7 +152,6 @@ int main(int argc, char **argv) {
   strcpy(en, "\xF9[p,moju\3g\xFCnhdb\2s\xFDvgf");
   decrypt(buff, en, strlen(en));
   std::cout << en << std::endl;
-  x.ReverseBytes(en, strlen(en));
   std::cout << en << std::endl;
   encrypt(en, buff, strlen(buff));
   std::cout << buff << std::endl;

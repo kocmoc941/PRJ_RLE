@@ -1,0 +1,10 @@
+
+		(function() {
+			var site = '6garazhniki';
+			var suffixes = ['','101','102','107','109'];
+			for( var i = 0; i < suffixes.length; i++ ) {
+				var suffix = suffixes[i];
+				document.cookie = site + 'uSoc' + suffix + '=0; path=/; expires=' + (new Date((new Date).getTime() - 1000*60*60*24*365)).toGMTString();
+			};
+		})();
+	 window.scurrent = 0; window.data = {}; window.ssdata = {}; try { document.getElementById('cdata').value="";document.getElementById('csoc_type').value=""; } catch(e) { /* nothing too critical... */ };

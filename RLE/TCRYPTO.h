@@ -1,6 +1,6 @@
 #pragma once
 
-#include <iostream>
+
 
 class TCRYPTO
 {
@@ -11,6 +11,8 @@ private:
   void Init();
   void Encrypt(unsigned char *data, unsigned int len, unsigned char *Key);
   void Decrypt(unsigned char *data, unsigned int len, unsigned char *Key);
+  void scrambleMod(char *n);
+  void unscrambleMod(char *n);
 
 public:
   template<typename T>
@@ -24,6 +26,7 @@ public:
 
   template<typename T, size_t size = sizeof(T) * 8 / 2>
   void SwapBites(T& a);
+
 };
 
 template<typename T, size_t size>

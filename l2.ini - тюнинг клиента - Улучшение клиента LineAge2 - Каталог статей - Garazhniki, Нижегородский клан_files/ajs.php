@@ -1,0 +1,204 @@
+(function(){
+var isIE = window.navigator.userAgent.indexOf("MSIE ") > 0;
+var ifr = "<"+"iframe id=\"cto_iframe_e7ba29ea98\" frameBorder=\"0\" allowtransparency=\"true\" hspace=\"0\" marginwidth=\"0\" marginheight=\"0\" scrolling=\"no\" vspace=\"0\" width=\"300px\" height=\"250px\"\n";
+if(isIE && document.domain !== window.location.hostname) {
+ifr += " src=\"javascript:'<script>window.onload=function(){document.write(\\\'<script>document.domain = &quot;"+document.domain + "&quot;;<\\\\/script>\\\');document.close();};</script>'\"";
+}
+ifr += "><"+"/iframe>\n";
+document.write(ifr);
+var ifc = "\n";
+ifc += "<"+"!DOCTYPE html>\n";
+ifc += "<"+"html>\n";
+ifc += "  <"+"head>\n";
+ifc += "    <"+"meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\">\n";
+ifc += "    <"+"meta name=\"format-detection\" content=\"telephone=no\">\n";
+ifc += "  <"+"/head>\n";
+ifc += "  <"+"body><"+"div id=\'cto_banner_content\'><"+"style>\n";
+ifc += "#cto_products .cto_product .imgholder{ text-align : center; background : #ffffff; float : left; margin-right : 7px; width : 113px; height : 113px;\n";
+ifc += "} #cto_products .cto_product .imgholder img{ border : none; max-width : 113px; max-height : 113px; *width : expression(this.width >= this.height ? \"113px\" : \"auto\"); *height : expression(this.width <"+" this.height ? \"113px\" : \"auto\");\n";
+ifc += "} #cto_products .cto_product .title{ overflow : hidden; color : #016090; font-size : 13px; height : 29px; line-height : 15px; font-weight : bold;\n";
+ifc += "} #cto_products .cto_product a:hover .title{ text-decoration : underline;\n";
+ifc += "} #cto_products .cto_product .desc{ overflow : hidden; color : #646464; font-size : 11px; height : 40px; line-height : 13px;\n";
+ifc += "} #cto_products .cto_product .priceDesc{ color : #016090; font-size : 12px; height : 23px; line-height : 14px;\n";
+ifc += "} #cto_products .cto_product .cta{ color : #000000; font-size : 11px; height : 23px; line-height : 13px; font-weight : bold;\n";
+ifc += "} #cto_products .cto_product a:hover .cta{ text-decoration : underline;\n";
+ifc += "} #cto_products .cto_product .details{ float : left; width : 176px;\n";
+ifc += "} #cto_products .cto_product *{ *cursor : pointer;\n";
+ifc += "} #cto_products .cto_product a{ color : black; text-decoration : none;\n";
+ifc += "} #cto_bannerContent{ width : 298px; height : 248px; background : #ffffff; position : relative; font-family : Arial,sans-serif; font-size : 0; overflow : hidden; border : 1px solid #e8e8e8;\n";
+ifc += "} #cto_products{ height : 231px; width : 298px; overflow : hidden;\n";
+ifc += "} #cto_products .cto_product{ width : 296px; height : 113px; float : left; text-align : left; overflow : hidden; vertical-align : top; zoom : 1; position : relative; *zoom : 1; *display : inline; margin : 1px 1px 1px 1px;\n";
+ifc += "} #cto_bannerContent .footer{ height : 17px; line-height : 16px; position : relative; text-align : left;\n";
+ifc += "} #cto_bannerContent .adUrl{ font-size : 11px; color : #808080; text-decoration : none; cursor : pointer; *cursor : pointer; zoom : 1; vertical-align : top; margin-right : 4px; display : inline-block; *display : inline; margin-left : 4px; line-height : 17px;\n";
+ifc += "} #cto_bannerContent .adUrl:hover{ text-decoration : underline;\n";
+ifc += "} #cto_bannerContent .legal{ text-overflow : ellipsis; white-space : nowrap; overflow : hidden; font-size : 11px; color : #808080; display : inline-block; *display : inline; height : 16px; width : 99.33333333333333px;\n";
+ifc += "} #cto_bannerContent .legalover{ position : absolute; left : 1px; box-sizing : border-box; font-size : 11px; color : #808080; text-decoration : none; display : block; zoom : 1; padding : 4px; background : #eee; opacity : 0.95; filter : alpha(opacity=95); visibility : hidden; line-height : 12px; width : 298px; bottom : 1px;\n";
+ifc += "} <"+"/style>\n";
+ifc += "<"+"div id=\"cto_bannerContent\">\n";
+ifc += "<"+"div id=\"cto_products\">\n";
+ifc += "\n";
+ifc += "<"+"div class=\"cto_product\">\n";
+ifc += "<"+"a href=\"http://cat.nl.eu.criteo.com/delivery/ck.php?cppv=1&cpp=AWgYgHxZWDY3UnUyYU9MY0t2MkdUMnZjb2NCQk84S2lNZ2VCQkxDekVKNXBoMGF0R0RmV043bG5FclNFZUZ2T1Q3WFRqaDdEOWJxUmkzV095emJpbGJLR0xtbk1TVk5mQzlTRkVzczRnUC9adjZiZjg5YkUvcEh4Z2R0MTVXNlB6UmpaNlZHbEE3bmhnYU9ld1kyb25nd0s3MFBKRkRXWGRDYWQ3Vm9mQ3R6TWZkYzNibnlBNEtEM3NBN1phL2lpNDBiSmlUdHlQbVZmZ0l0TEhkaHlJZG94cUdGQ0o1WlBkeEl2L3NVelRoa25QQURGQVFMMzVNOWdnWE8xbUtnb1E4dzZWMnBkWVRRWDdGOGh6TkRDUzAxZ0JPQT09fA%3D%3D&maxdest=http%3A%2F%2Fwww.mvideo.ru%2Fproducts%2Fvozduhouvlazhnitel-scarlett-sc-ah986m06-20031260%3Futm_medium%3Dcpc%26utm_content%3D20031260%26cityId%3DCityCZ_975%26utm_campaign%3DDynRmkt_kbt%26utm_source%3Drtg_criteo_other%26utm_term%3Dkbt_climt_Scarlett_SCAH986M06%26amp%3Breff%3Dyan_tov_dD40_c40402_g404020302_m617\" target=\"_blank\" >\n";
+ifc += "<"+"div class=\"imgholder\">\n";
+ifc += "<"+"img src=\"http://pix.nl.eu.criteo.net/img/img?h=400&i=23319-20031260&m=0&q=80&r=0&u=http%3A%2F%2Fimg.mvideo.ru%2FPdb%2F20031260b.jpg&w=400&s=ua16jJUwB86OLoZzBH6OKpDM\">\n";
+ifc += "<"+"/div>\n";
+ifc += "<"+"div class=\"details\">\n";
+ifc += "<"+"div class=\"title\" data-ellipsis=\"multiline\">&#1042;&#1086;&#1079;&#1076;&#1091;&#1093;&#1086;&#1091;&#1074;&#1083;&#1072;&#1078;&#1085;&#1080;&#1090;&#1077;&#1083;&#1100; Scarlett<"+"/div>\n";
+ifc += "<"+"div class=\"desc\" data-ellipsis=\"multiline\"><"+"/div>\n";
+ifc += "<"+"div class=\"priceDesc\">\n";
+ifc += "<"+"span class=\"priceType\">rrp<"+"/span>\n";
+ifc += "<"+"del class=\"origPrice\"><"+"/del>\n";
+ifc += "<"+"span class=\"price\">2 790 &#1088;.<"+"/span>\n";
+ifc += "<"+"/div>\n";
+ifc += "<"+"div class=\"cta\">__Купить__<"+"/div>\n";
+ifc += "<"+"/div>\n";
+ifc += "<"+"/a>\n";
+ifc += "<"+"/div>\n";
+ifc += "\n";
+ifc += "<"+"div class=\"cto_product\">\n";
+ifc += "<"+"a href=\"http://cat.nl.eu.criteo.com/delivery/ck.php?cppv=1&cpp=3o%2FTC3xZWDY3UnUyYU9MY0t2MkdUMnZjb2NCQk84S2lNZ2VCQkxDekVKNXBoMGF0R0RmV043bG5FclNFZUZ2T1Q3WFRqaDdEOWJxUmkzV095emJpbGJLR0xtbk1TVk5mQzlTRkVzczRnUC9adjZiZjg5YkUvcEh4Z2R0MTVXNlB6UmpaNlZHbEE3bmhnYU9ld1kyb25nd0s3MEJqRWk4eHZML2ZQK2l0eTZ0Mld4VTRyd1pjK3Q0eXU1NkI2TDkzYkdjQkU0TG1sS051Vm5Fa0NVekdQTFU5UkRzalZ0UVBCZUtnaGJpMkNVOFdvMU9LUE5BeDJsbnZPL1hSZXJSMHo1cFlKcndFVXdMcEpWeU52ejFCYjRxN21wdz09fA%3D%3D&maxdest=http%3A%2F%2Fwww.mvideo.ru%2Fproducts%2Fvozduhouvlazhnitel-polaris-puh-2650-20028096%3Futm_medium%3Dcpc%26utm_content%3D20028096%26cityId%3DCityCZ_975%26utm_campaign%3DDynRmkt_kbt%26utm_source%3Drtg_criteo_other%26utm_term%3Dkbt_climt_Polaris_PUH2650%26amp%3Breff%3Dyan_tov_dD40_c40402_g404020302_m31\" target=\"_blank\" >\n";
+ifc += "<"+"div class=\"imgholder\">\n";
+ifc += "<"+"img src=\"http://pix.nl.eu.criteo.net/img/img?h=400&i=23319-20028096&m=0&q=80&r=0&u=http%3A%2F%2Fimg.mvideo.ru%2FPdb%2F20028096b.jpg&w=400&s=xocSJ1vPfgpOjrllqt6ShZa8\">\n";
+ifc += "<"+"/div>\n";
+ifc += "<"+"div class=\"details\">\n";
+ifc += "<"+"div class=\"title\" data-ellipsis=\"multiline\">&#1042;&#1086;&#1079;&#1076;&#1091;&#1093;&#1086;&#1091;&#1074;&#1083;&#1072;&#1078;&#1085;&#1080;&#1090;&#1077;&#1083;&#1100; Polaris<"+"/div>\n";
+ifc += "<"+"div class=\"desc\" data-ellipsis=\"multiline\"><"+"/div>\n";
+ifc += "<"+"div class=\"priceDesc\">\n";
+ifc += "<"+"span class=\"priceType\">rrp<"+"/span>\n";
+ifc += "<"+"del class=\"origPrice\"><"+"/del>\n";
+ifc += "<"+"span class=\"price\">2 790 &#1088;.<"+"/span>\n";
+ifc += "<"+"/div>\n";
+ifc += "<"+"div class=\"cta\">__Купить__<"+"/div>\n";
+ifc += "<"+"/div>\n";
+ifc += "<"+"/a>\n";
+ifc += "<"+"/div>\n";
+ifc += "\n";
+ifc += "<"+"/div>\n";
+ifc += "<"+"!-- PRIVACY[BOTTOM:RIGHT] -->\n";
+ifc += " <"+"div class=\"footer\" id=\"footer\"> \n";
+ifc += "                            <"+"div class=\'privacy\'>\n";
+ifc += "                                <"+"a href=\'http://info.criteo.com/pac/privacy/informations?infonorm=1&amp;partner=23319&amp;campaignid=86958&amp;zoneid=372119&amp;bannerid=4494666&amp;displayid=e7ba29ea98\' target=\'_blank\'><"+"/a>\n";
+ifc += "                            <"+"/div> <"+"a href=\"http://cat.nl.eu.criteo.com/delivery/ck.php?cppv=1&amp;cpp=q24GgHxZWDY3UnUyYU9MY0t2MkdUMnZjb2NCQk84S2lNZ2VCQkxDekVKNXBoMGF0R0RmV043bG5FclNFZUZ2T1Q3WFRqaDdEOWJxUmkzV095emJpbGJLR0xtbk1TVk5mQzlTRkVzczRnUC9adjZiZjg5YkUvcEh4Z2R0MTVXNlB6UmpaNlZHbEE3bmhnYU9ld1kyb25nd0s3MEVEcEhJV3ZjM2xheVdtd1czYnJyc0Y1VEc3SFhJczVsNDJiVHltaXIxNkFiZjNXVCtZaDRONGE4NjVVMjNOVG9VcWJ6UUhuN0UvK0tROENxemJoVy9qbXJ0RTF5R2ErUmFHTFUyM2FHRFlPfA%3D%3D&amp;maxdest=http%3A%2F%2Fwww.mvideo.ru%3Futm_medium%3Dcpc%26utm_source%3Drtg_criteo_other%26utm_campaign%3Dlogo\" target=\"_blank\" id=\"adUrl\" class=\"adUrl\" >Реклама от mvideo.ru<"+"/a> <"+"span id=\"legal\" class=\"legal\" onmouseover=\"javascript:display_hide(\'legalover\');\">ООО «М.видео Менеджмент» |105066, Россия, Москва, ул. Нижняя Красносельская, 40/12 к. 20|ОГРН 1057746840095<"+"/span> <"+"/div> <"+"div id=\"legalover\" class=\"legalover\" onmouseout=\"javascript:display_hide(\'legalover\');\">ООО «М.видео Менеджмент» |105066, Россия, Москва, ул. Нижняя Красносельская, 40/12 к. 20|ОГРН 1057746840095<"+"/div>\n";
+ifc += " <"+"/div>\n";
+ifc += "<"+"style>#cto_banner_content .privacy {\n";
+ifc += "                    width:77px;\n";
+ifc += "                    float:right;\n";
+ifc += "                    text-align:right;\n";
+ifc += "                }\n";
+ifc += "\n";
+ifc += "                #cto_banner_content .privacy a {\n";
+ifc += "                    display:inline-block;\n";
+ifc += "                    width:19px;\n";
+ifc += "                    height:15px;\n";
+ifc += "                    background-image:url(http://static.eu.criteo.net/flash/icon/nai_small.png);\n";
+ifc += "                }\n";
+ifc += "\n";
+ifc += "                #cto_banner_content .privacy a:hover {\n";
+ifc += "                    width:77px;\n";
+ifc += "                    height:15px;\n";
+ifc += "                    background-image:url(http://static.eu.criteo.net/flash/icon/nai_big.png);\n";
+ifc += "                }<"+"/style>\n";
+ifc += "<"+"script type=\'text/javascript\'>(function() { var arrayEquals = function (a, b) {\n";
+ifc += "                if(a.length != b.length) return false;\n";
+ifc += "                a = a.sort();\n";
+ifc += "                b = b.sort();\n";
+ifc += "                for(var i = 0; i <"+" a.length; ++i) {\n";
+ifc += "                    if (a[i] != b[i]) return false;\n";
+ifc += "                }\n";
+ifc += "                return true;\n";
+ifc += "            };\n";
+ifc += "\n";
+ifc += "            var arrayIterate = function (a, fct) {\n";
+ifc += "                var len = a.length;\n";
+ifc += "                for(var i = 0; i <"+" len; ++i) {\n";
+ifc += "                    fct(a[i], i); \n";
+ifc += "                }\n";
+ifc += "             };\n";
+ifc += "   \n";
+ifc += "            var arrayWhere = function (a, fct) {\n";
+ifc += "                b = [];\n";
+ifc += "                arrayIterate(a, function(elt, index) {\n";
+ifc += "                    if(fct(elt, index)) b.push(elt);\n";
+ifc += "                });\n";
+ifc += "                return b;\n";
+ifc += "             };\n";
+ifc += "      \n";
+ifc += "            var arrayMap = function (a, fct) {\n";
+ifc += "                b = [];\n";
+ifc += "                arrayIterate(a, function(elt, index) {\n";
+ifc += "                    b[index] = fct(elt, index);\n";
+ifc += "                });\n";
+ifc += "                return b;\n";
+ifc += "            };\n";
+ifc += "\n";
+ifc += "            var multilineEllipsis = function (div) {\n";
+ifc += "                var t = div.textContent || div.innerText;\n";
+ifc += "                var d = document.createElement(\'div\');\n";
+ifc += "                var i = 0;    \n";
+ifc += "                d.style.width = div.offsetWidth + \'px\';\n";
+ifc += "                d.style.visibility = \"hidden\";\n";
+ifc += "                div.appendChild(d);\n";
+ifc += "\n";
+ifc += "                while(d.offsetHeight <"+"= div.offsetHeight && i <"+" t.length) {\n";
+ifc += "                    d.textContent = d.innerText = t.substr(0, i) + \'...\';\n";
+ifc += "                    ++i;\n";
+ifc += "                }\n";
+ifc += "\n";
+ifc += "                div.removeChild(d);\n";
+ifc += "                if(i != t.length) div.textContent = div.innerText = t.substr(0, i-2) + \'...\';\n";
+ifc += "            };\n";
+ifc += "\n";
+ifc += "            (function() {\n";
+ifc += "                var c = document.getElementById(\'cto_banner_content\');\n";
+ifc += "                var isMultilineEllipsis = function(elt) { return elt.getAttribute(\'data-ellipsis\') == \'multiline\'; };\n";
+ifc += "                arrayIterate(arrayWhere(c.getElementsByTagName(\'*\'), isMultilineEllipsis), multilineEllipsis);\n";
+ifc += "            })(); })();<"+"/script>\n";
+ifc += "<"+"script type=\"text/javascript\">\n";
+ifc += "var legal = document.getElementById(\"legal\");\n";
+ifc += "if(legal.innerText == \"\"){legal.style.display=\"none\";}\n";
+ifc += "else {document.getElementById(\"adUrl\").style.maxWidth=\"130px\";} function display_hide(id) { var legalLength = legal.innerHTML.length; var element = document.getElementById(id); if(element===null) return false; if((element.style.visibility==\"hidden\") && (legalLength > 10)){ element.style.visibility=\"visible\"; } else { element.style.visibility=\"hidden\"; } return true;\n";
+ifc += "} (function() { var getElts = function(className, domElem) { var desc = []; if (document.getElementsByClassName) { desc = domElem.getElementsByClassName(className); } else { var elem = domElem.getElementsByTagName(\'*\'); for (var x = 0; x <"+" elem.length; x++) { if ((\' \' + elem[x].className + \' \').indexOf(\' \' + className + \' \') > -1) desc.push(elem[x]); } } return desc; }; var truncate = function(div, maxCharacter) { var t = div.textContent || div.innerText || \"\"; var trimmed = t.replace(\'\\n\', \'\').replace(/^ +| +$/g, \'\'); if(trimmed.length > maxCharacter) div.textContent = div.innerText = trimmed.substr(0, maxCharacter-3) + \'...\'; }; var products = getElts(\"cto_product\", document); for(var x = 0; x <"+" products.length; ++x) { var cta = getElts(\"cta\", products[x])[0]; var ctaText = cta.textContent || cta.innerText || \"\"; if(ctaText.indexOf(\"__\") == 0){ var text = ctaText.replace(/_/g, \"\"); cta.innerHTML = text; }else{ cta.innerHTML = \"Go\"; } var price = getElts(\"priceDesc\", products[x])[0]; var priceType = getElts(\"priceType\", price)[0]; var priceNumber = getElts(\"price\", price)[0]; var priceOrig = getElts(\"origPrice\", price)[0]; var priceTypeText = priceType.textContent || priceType.innerText || \"\"; if (priceNumber.innerHTML == \"\" || priceNumber.innerHTML.length > 14) { price.removeChild(priceOrig); price.removeChild(priceType); price.removeChild(priceNumber); } else if (priceTypeText.indexOf(\"__\") == 0) { var altprice = priceTypeText.replace(/_/g, \"\"); priceType.innerHTML = altprice; price.removeChild(priceOrig); } else if (priceTypeText == \"rrp\") { price.removeChild(priceType); } }\n";
+ifc += "})(); <"+"/script><"+"/div><"+"div style=\'position: absolute; left: 0px; top: 0px; visibility: hidden;\'>\n";
+ifc += "<"+"iframe id=\'ife7ba29ea98\' name=\'ife7ba29ea98\' width=\'1px\' height=\'1px\'><"+"/iframe>\n";
+ifc += "<"+"/div>\n";
+ifc += "<"+"div id=\'beacon_e7ba29ea98\' style=\'position: absolute; left: 0px; top: 0px; visibility: hidden;\'>\n";
+ifc += "<"+"iframe width=\"0\" height=\"0\" style=\"display:none\" src=\"http://dis.eu.criteo.com/dis/dis.aspx?pu=89526&cb=e7ba29ea98\"><"+"/iframe>\n";
+ifc += "<"+"img width=\"0\" height=\"0\" src=\"http://cat.nl.eu.criteo.com/delivery/lg.php?cppv=1&cpp=L%2F%2BSt3xZWDY3UnUyYU9MY0t2MkdUMnZjb2NCQk84S2lNZ2VCQkxDekVKNXBoMGF0R0RmV043bG5FclNFZUZ2T1Q3WFRqaDdEOWJxUmkzV095emJpbGJLR0xtbk1TVk5mQzlTRkVzczRnUC9adjZiZFRXQlozOElVYWlrU3ZXSGUyZVlRbVdFV1N6MDRGQ0VpVllQSHV2ZWVXZ3Z6RDRrU3QzSit6RzRVMzBiNUtWWkxsMzVJa3ZMR0pOdXIyTG4zNWNRQ1VhU2doVmw3RmtYY1dUV0dON3hYNVFwWEJyUEczWjFpMm5mVmZJREhPTnlma1RDeEhGUkJRVjVkOFB3em1NT0pNTEhyZTQ2UlArWUg4UjU3L0xXeHZ2Zz09fA%3D%3D\"/>\n";
+ifc += "<"+"/div>\n";
+ifc += "<"+"/body>\n";
+ifc += "<"+"/html>\n";
+
+var fillIframe = function(ifrd) {
+    var getDocument = function(iframe) {
+        var result_document = iframe.contentWindow || iframe.contentDocument;
+        if (result_document && result_document.document)
+            result_document = result_document.document;
+        return result_document;
+    };
+    var c = getDocument(ifrd);
+    if (c) {
+        c.open();
+        c.write(ifc);
+        c.close();
+    }
+};
+
+
+var maxRetryAttempts = 100;
+var loaded = false;
+var pollIframe = function() {
+    var ifrd = document.getElementById('cto_iframe_e7ba29ea98');
+    if (ifrd && isIE) {
+         ifrd.onload = function() {
+            if(!loaded) {
+                loaded = true;
+                fillIframe(ifrd);
+            }
+        };
+    } else if (ifrd) {
+        loaded = true;
+        fillIframe(ifrd);
+    } else if (maxRetryAttempts-- > 0) {
+        setTimeout(pollIframe, 10);
+    }
+};pollIframe();})();
